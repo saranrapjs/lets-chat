@@ -19,7 +19,7 @@ AvatarProvider.prototype.fetch = function(user, query, cb) {
         '<svg xmlns="http://www.w3.org/2000/svg" pointer-events="none" width="50" height="50" ' +
         'style="width: 50px; height: 50px; background-color: rgb(' + colors[0] + ', ' + colors[1] + ', ' + colors[2] + ');">' +
             '<text text-anchor="middle" y="50%" x="50%" dy="0.36em" pointer-events="auto" fill="#ffffff" ' +
-            'font-family="monospace;" ' +
+            'font-family="monospace" ' +
             'style="font-weight: 400; font-size: 22px;">' + _.escape(user.displayName[0]).toUpperCase() + '</text>' +
         '</svg>';
 
