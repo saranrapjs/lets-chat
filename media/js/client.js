@@ -298,6 +298,10 @@
         }
         room.trigger('messages:new', message);
     };
+    Client.prototype.isTyping = function(message) {
+        var room = this.rooms.get(message.room);
+        room.trigger('messages:typing', message);
+    };
     Client.prototype.addMessages = function(messages, historical) {
         _.each(messages, function(message) {
             if (historical) {
@@ -308,6 +312,9 @@
     };
     Client.prototype.sendMessage = function(message) {
         this.socket.emit('messages:create', message);
+    };
+    Client.prototype.typingMessage = function(info) {
+        this.socket.emit('messages:typing', info);
     };
     Client.prototype.getMessages = function(query, callback) {
         this.socket.emit('messages:list', query, callback);
@@ -502,6 +509,9 @@
         this.socket.on('messages:new', function(message) {
             that.addMessage(message);
         });
+        this.socket.on('messages:typing', function(name) {
+            that.isTyping(name);
+        });
         this.socket.on('rooms:new', function(data) {
             that.addRoom(data);
         });
@@ -530,6 +540,7 @@
         // GUI
         //
         this.events.on('messages:send', this.sendMessage, this);
+        this.events.on('messages:typing', this.typingMessage, this);
         this.events.on('rooms:update', this.updateRoom, this);
         this.events.on('rooms:leave', this.leaveRoom, this);
         this.events.on('rooms:create', this.createRoom, this);

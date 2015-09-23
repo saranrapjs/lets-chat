@@ -85,6 +85,15 @@ module.exports = function() {
 
                 res.json(messages);
             });
+        },
+        typing: function(req) {
+            var msg = {
+                userId: req.user._id,
+                username: req.user.username,
+                room: req.param('room')
+            };
+            app.io.to(req.param('room'))
+              .emit('messages:typing', msg);          
         }
     });
 

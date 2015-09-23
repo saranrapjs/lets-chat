@@ -101,6 +101,7 @@
 }
 
 .lcb-entry {
+    position: relative;
     background: #fff;
     height: 70px;
     min-height: 70px;
@@ -109,6 +110,14 @@
     @media (max-width: @screen-xs-max) {
         height: 42px;
     }
+}
+
+.lcb-typing-status {
+    position: absolute;
+    font-size: 12px;
+    color:gray;
+    top: -30px;
+    left: 10px;
 }
 
 .lcb-entry-input {

@@ -37,6 +37,7 @@
                 Handlebars.compile($('#template-message').html());
             this.render();
             this.model.on('messages:new', this.addMessage, this);
+            this.model.on('messages:typing', this.messageTyping, this);
             this.model.on('change', this.updateMeta, this);
             this.model.on('remove', this.goodbye, this);
             this.model.users.on('change', this.updateUser, this);
@@ -343,6 +344,10 @@
             });
         },
         sendMessage: function(e) {
+            this.client.events.trigger('messages:typing', {
+                room: this.model.id,
+                username: this.client.user.get('username')
+            });
             if (e.type === 'keypress' && e.keyCode !== 13 || e.altKey) return;
             if (e.type === 'keypress' && e.keyCode === 13 && e.shiftKey) return;
             e.preventDefault();
@@ -398,6 +403,12 @@
                 that.scrollMessages();
             });
 
+        },
+        messageTyping: function(info) {
+            // if (info.usersId !== this.client.user.id) {
+            console.log(info)                
+            // }
+            this.$el.find('.lcb-typing-status').html(info.username + ' is typing')
         },
         formatMessage: function(text, cb) {
             var client = this.client;
