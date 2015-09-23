@@ -100,7 +100,7 @@ if (typeof exports !== 'undefined') {
         } else {
             return text.replace(linkPattern, function(url) {
                 var uri = encodeEntities(_.unescape(url));
-                return '<a href="' + uri + '" target="_blank">' + url + '</a>';
+                return '<a class="regular-link" href="' + uri + '" target="_blank">' + url + '</a>';
             });
         }
     }

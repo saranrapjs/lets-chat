@@ -92,11 +92,12 @@ app.use(helmet.hsts({
 app.use(helmet.contentSecurityPolicy({
     defaultSrc: ['\'none\''],
     connectSrc: ['*'],
-    scriptSrc: ['\'self\'', '\'unsafe-eval\''],
-    styleSrc: ['\'self\'', 'fonts.googleapis.com', '\'unsafe-inline\''],
+    scriptSrc: ['\'self\'', 'https://*.twitter.com', 'platform.twitter.com', '\'unsafe-eval\''],
+    styleSrc: ['\'self\'', 'fonts.googleapis.com', 'platform.twitter.com', '\'unsafe-inline\''],
     fontSrc: ['\'self\'', 'fonts.gstatic.com'],
     mediaSrc: ['\'self\''],
     objectSrc: ['\'self\''],
+    frameSrc: ['\'self\'', 'www.youtube.com'],
     imgSrc: ['*']
 }));
 

@@ -383,6 +383,13 @@
                 $html.find('time').updateTimeStamp();
                 that.$messages.append($html);
 
+                $text.find('a.regular-link').oembed(null, {
+                    fallback : false,
+                    maxWidth: 500,
+                    maxHeight: 350,
+                    includeHandle: false
+                });
+
                 if (!message.fragment) {
                     that.lastMessagePosted = posted;
                     that.lastMessageOwner = message.owner.id;
