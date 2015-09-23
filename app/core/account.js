@@ -1,7 +1,7 @@
 'use strict';
 
-var mongoose = require('mongoose');
-
+var mongoose = require('mongoose'),
+    settings = require('./../config');
 
 function AccountManager(options) {
     this.core = options.core;
@@ -10,6 +10,15 @@ function AccountManager(options) {
 AccountManager.prototype.create = function(provider, options, cb) {
     var User = mongoose.model('User');
     var user = new User({ provider: provider });
+
+    if (provider === 'local' && settings.auth && settings.auth.local.emails && settings.auth.local.emails.indexOf(options.email) === -1) {
+        cb({
+            errors: [{
+                message: 'Not a valid email addy'
+            }]
+        });
+        return;
+    }
 
     Object.keys(options).forEach(function(key) {
         user.set(key, options[key]);
