@@ -15,5 +15,6 @@
 //= require vendor/favico.js/favico.js
 //= require vendor/at/jquery.caret.js
 //= require vendor/at/jquery.atwho.js
+//= require vendor/jquery-oembed/jquery-oembed.js
 //= require vendor/backbone.keys/backbone.keys.js
 //= require common.js
